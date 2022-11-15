@@ -1,6 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto';
-import { PRODUCTS } from './products.mock';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { IProduct } from './interfaces/product.interfaces';
