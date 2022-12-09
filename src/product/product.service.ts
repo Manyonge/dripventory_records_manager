@@ -23,7 +23,9 @@ export class ProductService {
   }
 
   public async getProductById(id: string): Promise<any> {
-    const product = this.productModel.findOne({ id }, productProjection).exec();
+    const product = this.productModel
+      .findOne({ _id: id }, productProjection)
+      .exec();
     if (!product) {
       throw new HttpException('Not found', 404);
     }
@@ -31,18 +33,18 @@ export class ProductService {
   }
 
   public async deleteProductById(id: string): Promise<any> {
-    const product = await this.productModel.deleteOne({ id }).exec();
+    const product = await this.productModel.deleteOne({ _id: id }).exec();
     if (product.deletedCount === 0) {
       throw new HttpException('Not found', 404);
     }
     return product;
   }
-  public async patchProductById(
+  public async patchProduct(
     id: string,
     updateProductDto: UpdateProductDto,
   ): Promise<any> {
     const product = await this.productModel
-      .findOneAndUpdate({ id }, updateProductDto)
+      .findOneAndUpdate({ _id: id }, updateProductDto)
       .exec();
     if (!product) {
       throw new HttpException('Not found', 404);

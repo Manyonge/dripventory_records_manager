@@ -31,11 +31,11 @@ export class ProductController {
     return this.productService.deleteProductById(id);
   }
   @Patch(':id')
-  public async putProductById(
+  public async patchProduct(
     @Param('id')
     id: string,
     @Body() updateProductDto: UpdateProductDto,
   ) {
-    return this.productService.patchProductById(id, updateProductDto);
+    return this.productService.patchProduct(id, updateProductDto);
   }
 }
