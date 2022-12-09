@@ -1,10 +1,10 @@
 export class Product {
   _id: string;
   name: string;
-  quantity: number;
   buyingPrice: number;
   restockDate: string;
   sellingPrice: number;
+  sellingDate: string;
   createdAt: string;
   updateAt: string;
 }

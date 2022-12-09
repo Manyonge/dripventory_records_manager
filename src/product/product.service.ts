@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { CreateProductDto } from './dto';
-import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { CreateProductDto, UpdateProductDto } from './dto';
 import { IProduct } from './interfaces/product.interfaces';
 const productProjection = {
   __v: false,
@@ -37,13 +37,12 @@ export class ProductService {
     }
     return product;
   }
-  public async putProductById(
+  public async patchProductById(
     id: string,
-    propertyName: string,
-    propertyValue: string,
+    updateProductDto: UpdateProductDto,
   ): Promise<any> {
     const product = await this.productModel
-      .findOneAndUpdate({ id }, { [propertyName]: propertyValue })
+      .findOneAndUpdate({ id }, updateProductDto)
       .exec();
     if (!product) {
       throw new HttpException('Not found', 404);

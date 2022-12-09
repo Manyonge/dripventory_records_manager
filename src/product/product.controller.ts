@@ -4,12 +4,10 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
-  Query,
 } from '@nestjs/common';
-import { query } from 'express';
-import { CreateProductDto } from './dto';
+import { CreateProductDto, UpdateProductDto } from './dto';
 import { ProductService } from './product.service';
 
 @Controller('products')
@@ -32,14 +30,12 @@ export class ProductController {
   public async deleteProductById(@Param('id') id: string) {
     return this.productService.deleteProductById(id);
   }
-  @Put(':id')
+  @Patch(':id')
   public async putProductById(
     @Param('id')
     id: string,
-    @Query() query,
+    @Body() updateProductDto: UpdateProductDto,
   ) {
-    const propertyName = query.property_name;
-    const propertyValue = query.property_value;
-    return this.productService.putProductById(id, propertyName, propertyValue);
+    return this.productService.patchProductById(id, updateProductDto);
   }
 }
