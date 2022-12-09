@@ -1,6 +1,6 @@
-export class CreateSaleDto {
+export class Delivery {
+  _id: string;
   productName: string;
-  productId: string;
   customerContact: string;
   deliveryMethod: string;
   status: string;
