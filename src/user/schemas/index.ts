@@ -1,1 +1,1 @@
-export { DeliverySchema } from './delivery.schema';
+export { UserSchema } from './user.schema';

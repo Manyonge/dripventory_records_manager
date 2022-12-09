@@ -1,1 +1,1 @@
-export { IDelivery } from './delivery.interface';
+export { IUser } from './user.interface';

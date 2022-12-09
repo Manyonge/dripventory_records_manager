@@ -1,1 +1,1 @@
-export { Delivery } from './delivery.entity';
+export { User } from './user.entity';
