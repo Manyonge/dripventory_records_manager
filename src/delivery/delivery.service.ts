@@ -23,8 +23,8 @@ export class DeliveryService {
     return delivery;
   }
   public async postDelivery(newDelivery: CreateDeliveryDto) {
-    const delivery = await new this.deliveryModel(newDelivery);
-    return delivery.save();
+    const delivery = await this.deliveryModel.create(newDelivery);
+    return delivery;
   }
   public async getDeliveryById(id: string) {
     const delivery = this.deliveryModel.findOne(
