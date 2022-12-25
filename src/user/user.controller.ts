@@ -7,7 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { CreateUserDto, UpdateUserDto } from './dto';
+import { CreateUserDto, UpdateUserDto, VerifyUserDto } from "./dto";
 import { UserService } from './user.service';
 
 @Controller('users')
@@ -28,6 +28,10 @@ export class UserController {
   public async postUser(@Body() user: CreateUserDto) {
     return this.userService.postUser(user);
   }
+@Post('authenticate')
+public async verifyUser(@Body() verifyUser: VerifyUserDto){
+    return this.userService
+}
 
   @Patch(':id')
   public patchUser(

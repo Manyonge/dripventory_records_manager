@@ -1,8 +1,9 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateUserDto, UpdateUserDto } from './dto';
+import { CreateUserDto, UpdateUserDto, VerifyUserDto } from "./dto";
 import { IUser } from './interface';
+import { User } from './entities';
 
 const userProjection = {
   __v: false,
@@ -23,6 +24,17 @@ export class UserService {
   public async postUser(newUser: CreateUserDto) {
     const user = await this.userModel.create(newUser);
     return user;
+  }
+  public async verifyUser(verifyUser: VerifyUserDto){
+    const users = await this.userModel.find({}, userProjection)
+    const findByName = users.find((user: User)=> {
+      return user.password === verifyUser.password
+    })
+    if(findByName){
+      return findByName
+    }else {
+      throw new HttpException('User not found', 404);
+    }
   }
   public async getUserById(id: string) {
     const user = this.userModel.findOne({ _id: id }, userProjection);
